@@ -39,10 +39,5 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 The app is ready to be deployed after running `npm run build`. The build artifacts will be located in the `build/` directory.
 
-## Author
 
-This project was developed by Mohamed Lakssir during a summer internship.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE.md file for details.
