@@ -1,43 +1,31 @@
 # Fruit Grading Admin Dashboard
 
-This project is a web application for visualizing the historical data of maize samples sent by a grading analyzer via WiFi. It includes a dashboard with tables and charts (line, bar, and pie) for statistics.
+This project is a web application to visualize the historical data of fruit samples sent by a grading analyzer via WiFi. The admin dashboard includes charts and tables to represent the data.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+### Prerequisites
 
-### `npm start`
+- Node.js
+- npm (Node Package Manager)
 
-Runs the app in the development mode.\
-Open [http://localhost:8080](http://localhost:8080) to view it in your browser.
+### Installation
 
-### `npm run build`
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/thejokers69/fruit-grading.git
+    cd fruit-grading
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install the dependencies:
+    ```sh
+    npm install
+    ```
 
-### `npm test`
+### Running the Application
 
-Launches the test runner in the interactive watch mode.
+#### Frontend
 
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-## Project Structure
-
-- **public/**: Static files for the project.
-- **src/**: Source files for the project.
-  - **components/**: React components and Svelte components.
-  - **svelte/**: Additional Svelte files.
-  - `App.css`: Styling for the application.
-  - `App.js`: Main App component.
-  - `index.css`: Global styles.
-  - `index.js`: Entry point for the React application.
-
-## Deployment
-
-The app is ready to be deployed after running `npm run build`. The build artifacts will be located in the `build/` directory.
-
-
-
+To run the frontend application in development mode, use the following command:
+```sh
+npm start
