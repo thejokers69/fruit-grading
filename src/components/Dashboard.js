@@ -29,47 +29,34 @@ const profiles = [{
 ];
 
 const Dashboard = () => {
-    return ( <
-        div >
-        <
-        div className = "profile-summary" > {
-            profiles.map(profile => ( <
-                div key = { profile.id }
+    return ( 
+        <div>
+        <div className = "profile-summary" > {
+            profiles.map(profile => ( 
+                <div key = { profile.id }
                 className = "profile-summary-container" >
-                <
-                img src = { profile.photo }
+                <img src = { profile.photo } width="80px"
                 alt = { `${profile.firstName} ${profile.lastName}` }
                 className = "profile-summary-photo" / >
-                <
-                p > < strong > Full Name: < /strong> {profile.firstName} {profile.lastName}</p >
-                <
-                p > < strong > Role: < /strong> {profile.role}</p >
-                <
-                /div>
+                <p> <strong> Full Name: </strong> {profile.firstName} {profile.lastName}</p>
+                <p> <strong> Role: </strong> {profile.role}</p>
+                </div>
             ))
-        } <
-        /div> <
-        div className = "chart-container" >
-        <
-        div className = "chart" >
-        <
-        LineChart / >
-        <
-        /div> <
-        div className = "chart" >
-        <
-        BarChart / >
-        <
-        /div> <
-        div className = "chart" >
-        <
-        PieChart / >
-        <
-        /div> < /
-        div > <
-        DataTable / >
-        <
-        /div>
+        } 
+        </div> 
+        <div className = "chart-container">
+        <div className = "chart" >
+        <LineChart />
+        </div> 
+        <div className = "chart" >
+        <BarChart />
+        </div> 
+        <div className = "chart" >
+        <PieChart />
+        </div> 
+        </div> 
+        <DataTable />
+        </div>
     );
 };
 
