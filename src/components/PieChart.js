@@ -10,20 +10,19 @@ const data = {
             '#FF6384',
             '#36A2EB',
             '#FFCE56',
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
+            '#4BC0C0',
+            '#9966FF',
+            '#FF9F40',
         ],
-    }, ],
+    }],
 };
 
 const PieChart = () => ( <
     div >
     <
-    h2 > Pie Chart < /h2> <
     Pie data = { data }
-    /> <
-    /div>
+    /> < /
+    div >
 );
 
 export default PieChart;

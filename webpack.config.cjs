@@ -1,58 +1,38 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/index.js',
-    resolve: {
-        alias: {
-            svelte: path.resolve('node_modules', 'svelte')
-        },
-        extensions: ['.mjs', '.js', '.svelte'],
-        mainFields: ['svelte', 'browser', 'module', 'main'],
-        conditionNames: ['svelte', 'browser', 'import']
-    },
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
     },
     module: {
         rules: [{
-                test: /\.svelte$/,
-                use: {
-                    loader: 'svelte-loader',
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: [{
+                    loader: 'url-loader',
                     options: {
-                        emitCss: true,
-                        hotReload: true,
+                        limit: 8192,
+                        name: 'images/[name].[hash].[ext]',
                     },
+                }, ],
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
                 },
             },
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
             },
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                    },
-                },
-            },
         ],
     },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-        }),
-    ],
     devServer: {
-        static: {
-            directory: path.resolve(__dirname, 'public'),
-        },
-        hot: true,
+        contentBase: path.join(__dirname, 'public'),
+        compress: true,
+        port: 8080,
     },
 };

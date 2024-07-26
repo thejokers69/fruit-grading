@@ -1,50 +1,70 @@
 import React from 'react';
-import LineChart from './components/LineChart.js';
-import BarChart from './components/BarChart.js';
-import PieChart from './components/PieChart.js';
-import DataTable from './components/DataTable.js';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import Dashboard from './components/Dashboard.js';
+import Charts from './components/Charts.js';
+import Table from './components/DataTable.js';
+import Map from './components/Map.js';
+import Profile from './components/Profile.js';
+import logo from './assets/mascir.jpeg';
+import './App.css';
 
 function App() {
     return ( <
+        Router >
+        <
         div className = "container" >
         <
-        header >
+        div className = "sidebar" >
         <
-        h1 > Fruit Grading Admin Dashboard < /h1> <
-        /header>
-
+        img src = { logo }
+        alt = "Logo" / >
         <
-        div className = "chart-container" >
+        h2 > MAScIR < /h2> <
+        ul >
         <
-        div className = "chart" >
+        li > < NavLink to = "/dashboard"
+        activeClassName = "active" > Dashboard < /NavLink></li >
         <
-        h2 > Line Chart < /h2> <
-        LineChart / >
+        li > < NavLink to = "/charts"
+        activeClassName = "active" > Charts < /NavLink></li >
         <
-        /div> <
-        div className = "chart" >
+        li > < NavLink to = "/table"
+        activeClassName = "active" > Table < /NavLink></li >
         <
-        h2 > Bar Chart < /h2> <
-        BarChart / >
+        li > < NavLink to = "/map"
+        activeClassName = "active" > Map < /NavLink></li >
         <
-        /div> <
-        div className = "chart" >
+        li > < NavLink to = "/profile"
+        activeClassName = "active" > Profile < /NavLink></li >
         <
-        h2 > Pie Chart < /h2> <
-        PieChart / >
+        /ul> < /
+        div > <
+        div className = "main-content" >
         <
-        /div> <
-        /div>
-
+        Routes >
         <
-        DataTable / >
-
-        <
-        footer >
-        <
-        p > ©2024 Fruit Grading Admin Dashboard < /p> <
-        /footer> <
-        /div>
+        Route path = "/dashboard"
+        element = { < Dashboard / > }
+        /> <
+        Route path = "/charts"
+        element = { < Charts / > }
+        /> <
+        Route path = "/table"
+        element = { < Table / > }
+        /> <
+        Route path = "/map"
+        element = { < Map / > }
+        /> <
+        Route path = "/profile"
+        element = { < Profile / > }
+        /> <
+        Route path = "/"
+        element = { < Dashboard / > }
+        /> < /
+        Routes > <
+        /div> < /
+        div > <
+        /Router>
     );
 }
 

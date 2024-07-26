@@ -44777,20 +44777,23 @@
 ├── package.json
 ├── project_structure.txt
 ├── public
+│   └── mascir.jpeg
 ├── rollup.config.mjs
 ├── server.mjs
 ├── src
 │   ├── App.css
 │   ├── App.js
-│   ├── App.test.js
 │   ├── components
 │   │   ├── BarChart.js
 │   │   ├── Charts.js
 │   │   ├── Dashboard.js
 │   │   ├── DataTable.js
+│   │   ├── Header.css
+│   │   ├── Header.js
 │   │   ├── LineChart.js
 │   │   ├── Map.js
 │   │   ├── PieChart.js
+│   │   ├── Profile.js
 │   │   ├── SampleTable.js
 │   │   ├── SvelteComponent.svelte
 │   │   └── SvelteComponentWrapper.js
@@ -44798,11 +44801,9 @@
 │   ├── index.html
 │   ├── index.js
 │   ├── logo.svg
-│   ├── reportWebVitals.js
-│   ├── setupTests.js
 │   └── svelte
 │       ├── Sample.svelte
 │       └── main.js
 └── webpack.config.cjs
 
-5083 directories, 39723 files
+5083 directories, 39724 files
