@@ -107,3 +107,19 @@ footer {
     margin-top: 20px;
     text-align: center;
 }
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+    .sidebar.open+.main-content {
+        margin-left: 250px;
+    }
+}

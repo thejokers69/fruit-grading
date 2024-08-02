@@ -5,15 +5,12 @@ import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
     useEffect(() => {
-        // Initialize the map
         const map = L.map('map').setView([51.505, -0.09], 13);
 
-        // Set up the OSM layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
         }).addTo(map);
 
-        // Add user location (if available)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 const { latitude, longitude } = position.coords;
@@ -23,7 +20,6 @@ const Map = () => {
             });
         }
 
-        // Fetch sample locations and add them to the map
         fetch('http://localhost:3001/api/locations')
             .then(response => response.json())
             .then(locations => {
@@ -37,7 +33,8 @@ const Map = () => {
 
     return <div id = "map"
     style = {
-        { height: '500px' } } > < /div>;
+        { height: '500px' }
+    } > < /div>;
 };
 
 export default Map;
