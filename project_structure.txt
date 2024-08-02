@@ -2,28 +2,19 @@
 |-- README.md
 |-- build
 |   |-- asset-manifest.json
-|   |-- build
-|   |   |-- bundle.css
-|   |   |-- bundle.js
-|   |   `-- bundle.js.map
-|   |-- favicon.ico
+|   |-- assets
+|   |   |-- blakssir.jpeg
+|   |   |-- logo.svg
+|   |   `-- mascir.jpeg
 |   |-- index.html
-|   |-- logo192.png
-|   |-- logo512.png
-|   |-- manifest.json
-|   |-- robots.txt
 |   `-- static
 |       |-- css
-|       |   |-- main.cd7c9126.css
-|       |   `-- main.cd7c9126.css.map
-|       |-- js
-|       |   |-- 453.b5094600.chunk.js
-|       |   |-- 453.b5094600.chunk.js.map
-|       |   |-- main.e8458e83.js
-|       |   |-- main.e8458e83.js.LICENSE.txt
-|       |   `-- main.e8458e83.js.map
-|       `-- media
-|           `-- Sample.24cdf9769c96d2f8c391.svelte
+|       |   |-- main.8f20739b.css
+|       |   `-- main.8f20739b.css.map
+|       `-- js
+|           |-- main.b0aa4582.js
+|           |-- main.b0aa4582.js.LICENSE.txt
+|           `-- main.b0aa4582.js.map
 |-- node_modules
 |   |-- @adobe
 |   |   `-- css-tools
@@ -1740,6 +1731,14 @@
 |   |   |   |   |-- targets-parser.js
 |   |   |   |   `-- targets-parser.js.map
 |   |   |   |-- node_modules
+|   |   |   |   |-- @babel
+|   |   |   |   |   `-- plugin-proposal-private-property-in-object
+|   |   |   |   |       |-- LICENSE
+|   |   |   |   |       |-- README.md
+|   |   |   |   |       |-- lib
+|   |   |   |   |       |   |-- index.js
+|   |   |   |   |       |   `-- index.js.map
+|   |   |   |   |       `-- package.json
 |   |   |   |   `-- semver
 |   |   |   |       |-- LICENSE
 |   |   |   |       |-- README.md
@@ -45312,13 +45311,17 @@
 |   |   |-- Login.css
 |   |   |-- Login.js
 |   |   |-- Logout.js
+|   |   |-- Map.css
 |   |   |-- Map.js
 |   |   |-- PieChart.js
 |   |   |-- Profile.css
 |   |   |-- Profile.js
 |   |   |-- SampleTable.js
+|   |   |-- Sidebar.css
+|   |   |-- Sidebar.js
 |   |   |-- SvelteComponent.svelte
 |   |   |-- SvelteComponentWrapper.js
+|   |   |-- UserTable.css
 |   |   `-- UserTable.js
 |   |-- contexts
 |   |   `-- AuthContext.js
@@ -45329,4 +45332,4 @@
 |       `-- main.js
 `-- webpack.config.cjs
 
-5176 directories, 40154 files
+5178 directories, 40155 files

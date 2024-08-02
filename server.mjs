@@ -37,7 +37,20 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+app.put('/api/user/update', (req, res) => {
+    const { username, firstName, lastName, role, photo } = req.body;
+    const user = users.find(u => u.username === username);
 
+    if (user) {
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.role = role;
+        user.photo = photo;
+        res.json({ message: 'Profile updated successfully', user });
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
+});
 app.post('/upload', upload.single('file'), (req, res) => {
     res.json({ filePath: `/${req.file.filename}` });
 });
@@ -66,6 +79,16 @@ app.post('/login', (req, res) => {
     }
 });
 
+app.get('/api/users', (req, res) => {
+
+    const usersWithoutPassword = users.map(({ username, role }, index) => ({
+        id: index + 1,
+        username,
+        role,
+    }));
+    res.json(usersWithoutPassword);
+});
+
 app.get('/api/data', (req, res) => {
     res.json(sampleData);
 });
@@ -76,4 +99,30 @@ app.get('/api/locations', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
+});
+
+app.put('/api/users/:id', (req, res) => {
+    const { id } = req.params;
+    const { username, role } = req.body;
+    const user = users.find(u => u.id === parseInt(id));
+
+    if (user) {
+        user.username = username;
+        user.role = role;
+        res.json(user);
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
+});
+
+app.delete('/api/users/:id', (req, res) => {
+    const { id } = req.params;
+    const index = users.findIndex(u => u.id === parseInt(id));
+
+    if (index !== -1) {
+        users.splice(index, 1);
+        res.json({ message: 'User deleted' });
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
 });

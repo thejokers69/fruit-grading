@@ -1,0 +1,72 @@
+// src/components/UserTable.css
+
+.user-table-container {
+    padding: 20px;
+    background-color: #20232a;
+    color: white;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.user-table-container h2 {
+    color: #61dafb;
+}
+
+.user-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-table-container th,
+td {
+    padding: 10px;
+    border: 1px solid #444;
+    text-align: left;
+}
+
+.user-table-container th {
+    background-color: #282c34;
+}
+
+.user-table-container .edit-container,
+.user-table-container .add-container {
+    margin-top: 20px;
+}
+
+.user-table-container input {
+    margin-right: 10px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    outline: none;
+}
+
+.user-table-container button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #61dafb;
+    color: #282c34;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-table-container button:hover {
+    background-color: #21a1f1;
+}
+
+.user-table-container select {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    outline: none;
+}
+
+.user-table-container select:focus {
+    border: 1px solid #61dafb;
+}

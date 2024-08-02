@@ -27,9 +27,11 @@ const Sidebar = () => {
                 <
                 li > < NavLink to = "/map" > Map < /NavLink></li >
                 <
-                li > < NavLink to = "/profile" > Profile < /NavLink></li >
-
-                <
+                li > < NavLink to = "/profile" > Profile < /NavLink></li > {
+                    user.role === 'admin' && ( <
+                        li > < NavLink to = "/users" > User Management < /NavLink></li >
+                    )
+                } <
                 li > < NavLink to = "/logout"
                 onClick = { logout } > Logout < /NavLink></li >
                 <
@@ -38,8 +40,8 @@ const Sidebar = () => {
                 li > < NavLink to = "/login" > Login < /NavLink></li >
             )
         } <
-        /ul> < /
-        div >
+        /ul> <
+        /div>
     );
 };
 

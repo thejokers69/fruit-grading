@@ -9,6 +9,7 @@ import Map from './components/Map.js';
 import Profile from './components/Profile.js';
 import Login from './components/Login.js';
 import Logout from './components/Logout.js';
+import UserTable from './components/UserTable.js';
 import Sidebar from './components/Sidebar.js';
 import './App.css';
 
@@ -58,24 +59,30 @@ const App = () => {
                                 Route path = "/profile"
                                 element = { < ProtectedRoute element = { < Profile / > }
                                     allowedRoles = {
-                                        ['admin'] }
+                                        ['admin', 'user'] }
                                     />} / >
                                     <
-                                    Route path = "/login"
-                                    element = { < Login / > }
-                                    /> <
-                                    Route path = "/logout"
-                                    element = { < Logout / > }
-                                    /> <
-                                    Route path = "/"
-                                    element = { < Navigate to = "/dashboard" / > }
-                                    /> <
-                                    /Routes> <
-                                    /div> <
-                                    /div> <
-                                    /Router> <
-                                    /AuthProvider>
-                                );
-                            };
+                                    Route path = "/users"
+                                    element = { < ProtectedRoute element = { < UserTable / > }
+                                        allowedRoles = {
+                                            ['admin'] }
+                                        />} / >
+                                        <
+                                        Route path = "/login"
+                                        element = { < Login / > }
+                                        /> <
+                                        Route path = "/logout"
+                                        element = { < Logout / > }
+                                        /> <
+                                        Route path = "/"
+                                        element = { < Navigate to = "/dashboard" / > }
+                                        /> <
+                                        /Routes> <
+                                        /div> <
+                                        /div> <
+                                        /Router> <
+                                        /AuthProvider>
+                                    );
+                                };
 
-                            export default App;
+                                export default App;
