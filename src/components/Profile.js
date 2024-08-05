@@ -15,26 +15,43 @@ const Profile = () => {
     });
 
     const handleUpdate = async () => {
+        console.log('Starting profile update...');
         let photoPath = updatedUser.photo;
-
-        if (file) {
-            const formData = new FormData();
-            formData.append('file', file);
-            const response = await fetch('http://localhost:3001/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-            photoPath = data.filePath;
+    
+        try {
+            if (file) {
+                console.log('Uploading file...');
+                const formData = new FormData();
+                formData.append('file', file);
+                const response = await fetch('http://localhost:3001/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    photoPath = data.filePath;
+                    console.log(`File uploaded to: ${photoPath}`);
+                } else {
+                    const errorText = await response.text();
+                    console.error(`Error uploading image: ${errorText}`);
+                    throw new Error(`Erreur de téléchargement de l'image: ${errorText}`);
+                }
+            }
+    
+            const updatedProfile = {
+                ...updatedUser,
+                photo: photoPath,
+            };
+    
+            console.log('Sending updated profile to server...');
+            await updateUser(user.id, updatedProfile);
+            console.log('Profile updated successfully');
+            setEditingProfile(false);
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Une erreur est survenue lors de la mise à jour du profil. Veuillez réessayer.');
         }
-
-        const updatedProfile = {
-            ...updatedUser,
-            photo: photoPath,
-        };
-
-        await updateUser(user.id, updatedProfile);
-        setEditingProfile(false);
     };
 
     return (

@@ -4,7 +4,8 @@ import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
 import bcrypt from 'bcryptjs';
-
+import fs from 'fs'; // Importation de fs
+import winston from 'winston';
 const app = express();
 const port = 3001;
 
@@ -37,7 +38,32 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+const uploadDir = 'uploads/';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+app.post('/upload', upload.single('file'), (req, res) => {
+    if (!req.file) {
+        console.error('No file uploaded');
+        return res.status(400).send({ error: 'No file uploaded' });
+    }
+    console.log('File uploaded:', req.file.filename);
+    res.status(200).send({ filePath: `/${req.file.filename}` });
+});
+
+app.post('/upload', upload.single('file'), (req, res) => {
+    if (!req.file) {
+        console.log('No file uploaded');
+        return res.status(400).send({ error: 'No file uploaded' });
+    }
+    console.log(`File uploaded: ${req.file.filename}`);
+    res.status(200).send({ filePath: `/${req.file.filename}` });
+});
+
 app.put('/api/user/update', (req, res) => {
+    console.log(`Updating user: ${req.body.username}`);
     const { username, firstName, lastName, role, photo } = req.body;
     const user = users.find(u => u.username === username);
 
@@ -46,13 +72,12 @@ app.put('/api/user/update', (req, res) => {
         user.lastName = lastName;
         user.role = role;
         user.photo = photo;
+        console.log(`User updated: ${JSON.stringify(user)}`);
         res.json({ message: 'Profile updated successfully', user });
     } else {
+        console.log('User not found');
         res.status(404).json({ message: 'User not found' });
     }
-});
-app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ filePath: `/${req.file.filename}` });
 });
 
 app.post('/register', (req, res) => {
@@ -80,7 +105,6 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/api/users', (req, res) => {
-
     const usersWithoutPassword = users.map(({ username, role }, index) => ({
         id: index + 1,
         username,
@@ -126,3 +150,21 @@ app.delete('/api/users/:id', (req, res) => {
         res.status(404).json({ message: 'User not found' });
     }
 });
+
+const logger = winston.createLogger({
+    level: 'info',
+    format: winston.format.json(),
+    transports: [
+      new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+      new winston.transports.File({ filename: 'logs/combined.log' }),
+    ],
+  });
+
+app.use((req, res, next) => {
+  logger.info(`${req.method} ${req.url}`);
+  next();
+});
+app.use((err, req, res, next) => {
+    logger.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
