@@ -14,68 +14,55 @@ import './App.css';
 
 const ProtectedRoute = ({ element, allowedRoles }) => {
     const { user } = useAuth();
-    return user && allowedRoles.includes(user.role) ? element : < Navigate to = "/login" / > ;
+    return user && allowedRoles.includes(user.role) ? element : < Navigate to = "/login" /> ;
 };
 
 const App = () => {
-        return ( <
-                AuthProvider >
-                <
-                Router >
-                <
-                div className = "container" >
-                <
-                Sidebar / >
-                <
-                div className = "main-content" >
-                <
-                Routes >
-                <
-                Route path = "/dashboard"
-                element = { < ProtectedRoute element = { < Dashboard / > }
+        return ( <AuthProvider>
+                <Router>
+                <div className = "container">
+                <Sidebar / >
+                <div className = "main-content">
+                <Routes>
+                <Route path = "/dashboard"
+                element = { < ProtectedRoute element = { <Dashboard/> }
                     allowedRoles = {
                         ['admin', 'user'] }
-                    />} / >
-                    <
-                    Route path = "/charts"
-                    element = { < ProtectedRoute element = { < Charts / > }
+                    />} />
+                    <Route path = "/charts"
+                    element = { <ProtectedRoute element = { <Charts/> }
                         allowedRoles = {
                             ['admin', 'user'] }
-                        />} / >
-                        <
-                        Route path = "/table"
-                        element = { < ProtectedRoute element = { < Table / > }
+                        />} />
+                        <Route path = "/table"
+                        element = { < ProtectedRoute element = { < Table /> }
                             allowedRoles = {
                                 ['admin', 'user'] }
-                            />} / >
-                            <
-                            Route path = "/map"
-                            element = { < ProtectedRoute element = { < Map / > }
+                            />} />
+                            <Route path = "/map"
+                            element = { < ProtectedRoute element = { <Map /> }
                                 allowedRoles = {
                                     ['admin', 'user'] }
-                                />} / >
-                                <
-                                Route path = "/profile"
-                                element = { < ProtectedRoute element = { < Profile / > }
+                                />} />
+                                <Route path = "/profile"
+                                element = { < ProtectedRoute element = { < Profile /> }
                                     allowedRoles = {
                                         ['admin'] }
-                                    />} / >
-                                    <
-                                    Route path = "/login"
-                                    element = { < Login / > }
-                                    /> <
-                                    Route path = "/logout"
-                                    element = { < Logout / > }
-                                    /> <
-                                    Route path = "/"
-                                    element = { < Navigate to = "/dashboard" / > }
-                                    /> <
-                                    /Routes> <
-                                    /div> <
-                                    /div> <
-                                    /Router> <
-                                    /AuthProvider>
+                                    />} />
+                                    <Route path = "/login"
+                                    element = { <Login /> }
+                                    /> 
+                                    <Route path = "/logout"
+                                    element = { <Logout /> }
+                                    /> 
+                                    <Route path = "/"
+                                    element = { < Navigate to = "/dashboard" /> }
+                                    /> </Routes> 
+                                    </div> 
+                                    </div> 
+                                    </Router> 
+                                    </AuthProvider>
                                 );
                             };
 
-                            export default App;
+export default App;
