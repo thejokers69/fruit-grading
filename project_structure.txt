@@ -2,28 +2,19 @@
 |-- README.md
 |-- build
 |   |-- asset-manifest.json
-|   |-- build
-|   |   |-- bundle.css
-|   |   |-- bundle.js
-|   |   `-- bundle.js.map
-|   |-- favicon.ico
+|   |-- assets
+|   |   |-- blakssir.jpeg
+|   |   |-- logo.svg
+|   |   `-- mascir.jpeg
 |   |-- index.html
-|   |-- logo192.png
-|   |-- logo512.png
-|   |-- manifest.json
-|   |-- robots.txt
 |   `-- static
 |       |-- css
-|       |   |-- main.cd7c9126.css
-|       |   `-- main.cd7c9126.css.map
-|       |-- js
-|       |   |-- 453.b5094600.chunk.js
-|       |   |-- 453.b5094600.chunk.js.map
-|       |   |-- main.e8458e83.js
-|       |   |-- main.e8458e83.js.LICENSE.txt
-|       |   `-- main.e8458e83.js.map
-|       `-- media
-|           `-- Sample.24cdf9769c96d2f8c391.svelte
+|       |   |-- main.8f20739b.css
+|       |   `-- main.8f20739b.css.map
+|       `-- js
+|           |-- main.b0aa4582.js
+|           |-- main.b0aa4582.js.LICENSE.txt
+|           `-- main.b0aa4582.js.map
 |-- node_modules
 |   |-- @adobe
 |   |   `-- css-tools
@@ -1740,6 +1731,14 @@
 |   |   |   |   |-- targets-parser.js
 |   |   |   |   `-- targets-parser.js.map
 |   |   |   |-- node_modules
+|   |   |   |   |-- @babel
+|   |   |   |   |   `-- plugin-proposal-private-property-in-object
+|   |   |   |   |       |-- LICENSE
+|   |   |   |   |       |-- README.md
+|   |   |   |   |       |-- lib
+|   |   |   |   |       |   |-- index.js
+|   |   |   |   |       |   `-- index.js.map
+|   |   |   |   |       `-- package.json
 |   |   |   |   `-- semver
 |   |   |   |       |-- LICENSE
 |   |   |   |       |-- README.md
@@ -35021,6 +35020,182 @@
 |   |   |-- lib
 |   |   |   `-- index.js
 |   |   `-- package.json
+|   |-- react-icons
+|   |   |-- LICENSE
+|   |   |-- README.md
+|   |   |-- ai
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- bi
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- bs
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- cg
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- ci
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- di
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- fa
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- fa6
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- fc
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- fi
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- gi
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- go
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- gr
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- hi
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- hi2
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- im
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- index.d.ts
+|   |   |-- index.js
+|   |   |-- index.mjs
+|   |   |-- io
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- io5
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- lia
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- lib
+|   |   |   |-- iconBase.d.ts
+|   |   |   |-- iconBase.js
+|   |   |   |-- iconBase.mjs
+|   |   |   |-- iconContext.d.ts
+|   |   |   |-- iconContext.js
+|   |   |   |-- iconContext.mjs
+|   |   |   |-- iconsManifest.d.ts
+|   |   |   |-- iconsManifest.js
+|   |   |   |-- iconsManifest.mjs
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- lu
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- md
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- package.json
+|   |   |-- pi
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- ri
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- rx
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- si
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- sl
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- tb
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- tfi
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- ti
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   |-- vsc
+|   |   |   |-- index.d.ts
+|   |   |   |-- index.js
+|   |   |   |-- index.mjs
+|   |   |   `-- package.json
+|   |   `-- wi
+|   |       |-- index.d.ts
+|   |       |-- index.js
+|   |       |-- index.mjs
+|   |       `-- package.json
 |   |-- react-is
 |   |   |-- LICENSE
 |   |   |-- README.md
@@ -45301,6 +45476,8 @@
 |-- src
 |   |-- App.css
 |   |-- App.js
+|   |-- api
+|   |   `-- userApi.js
 |   |-- components
 |   |   |-- BarChart.js
 |   |   |-- Charts.js
@@ -45312,13 +45489,17 @@
 |   |   |-- Login.css
 |   |   |-- Login.js
 |   |   |-- Logout.js
+|   |   |-- Map.css
 |   |   |-- Map.js
 |   |   |-- PieChart.js
 |   |   |-- Profile.css
 |   |   |-- Profile.js
 |   |   |-- SampleTable.js
+|   |   |-- Sidebar.css
+|   |   |-- Sidebar.js
 |   |   |-- SvelteComponent.svelte
 |   |   |-- SvelteComponentWrapper.js
+|   |   |-- UserTable.css
 |   |   `-- UserTable.js
 |   |-- contexts
 |   |   `-- AuthContext.js
@@ -45327,6 +45508,10 @@
 |   `-- svelte
 |       |-- Sample.svelte
 |       `-- main.js
+|-- uploads
+|   |-- 1722606197975.jpg
+|   |-- 1722606267624.jpg
+|   `-- 1722606320992.jpg
 `-- webpack.config.cjs
 
-5176 directories, 40154 files
+5213 directories, 40302 files

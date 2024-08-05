@@ -1,35 +1,40 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+// src/components/Map.js
+import React, { useEffect } from 'react';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const sampleLocations = [
-    { id: 1, lat: 51.505, lng: -0.09, sample: 'Sample 1' },
-    { id: 2, lat: 51.51, lng: -0.1, sample: 'Sample 2' }
-];
-
 const Map = () => {
-    return ( <
-        MapContainer center = {
-            [51.505, -0.09] }
-        zoom = { 13 }
-        style = {
-            { height: '500px', width: '100%' } } >
-        <
-        TileLayer url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' /
-        > {
-            sampleLocations.map(location => ( <
-                Marker key = { location.id }
-                position = {
-                    [location.lat, location.lng] } >
-                <
-                Popup > { location.sample } <
-                /Popup> <
-                /Marker>
-            ))
-        } <
-        /MapContainer>
-    );
+    useEffect(() => {
+        const map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const { latitude, longitude } = position.coords;
+                L.marker([latitude, longitude]).addTo(map)
+                    .bindPopup("You are here").openPopup();
+                map.setView([latitude, longitude], 13);
+            });
+        }
+
+        fetch('http://localhost:3001/api/locations')
+            .then(response => response.json())
+            .then(locations => {
+                locations.forEach(location => {
+                    L.marker([location.lat, location.lng])
+                        .addTo(map)
+                        .bindPopup(`<b>${location.sample}</b>`);
+                });
+            });
+    }, []);
+
+    return <div id = "map"
+    style = {
+        { height: '500px' }
+    } > < /div>;
 };
 
 export default Map;

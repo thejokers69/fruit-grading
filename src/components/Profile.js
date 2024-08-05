@@ -1,177 +1,95 @@
 // src/components/Profile.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext.js';
 import './Profile.css';
 
 const Profile = () => {
-    const [profiles, setProfiles] = useState([]);
-    const [editingProfile, setEditingProfile] = useState(null);
-    const [newProfile, setNewProfile] = useState({ firstName: '', lastName: '', role: '', photo: '' });
+    const { user, updateUser } = useAuth();
+    const [editingProfile, setEditingProfile] = useState(false);
     const [file, setFile] = useState(null);
+    const [updatedUser, setUpdatedUser] = useState({
+        firstName: user?.firstName || '',
+        lastName: user?.lastName || '',
+        role: user?.role || '',
+        photo: user?.photo || '',
+    });
 
-    useEffect(() => {
-        // Fetch profiles from server (this would typically be done via an API call)
-        setProfiles([
-            { id: 1, firstName: 'Brahim', lastName: 'Lakssir', role: 'Admin', photo: '/assets/blakssir.jpeg' },
-            { id: 2, firstName: 'Nouhaila', lastName: 'Benzakour', role: 'Admin', photo: '/assets/logo.svg' },
-            { id: 3, firstName: 'Mohamed', lastName: 'Lakssir', role: 'User', photo: '/assets/logo.svg' }
-        ]);
-    }, []);
-
-    const handleEdit = (id) => {
-        const profile = profiles.find(p => p.id === id);
-        setEditingProfile(profile);
-    };
-
-    const handleDelete = (id) => {
-        setProfiles(profiles.filter(p => p.id !== id));
-    };
-
-    const handleAdd = async() => {
-        const newId = profiles.length ? profiles[profiles.length - 1].id + 1 : 1;
-        let photoPath = newProfile.photo;
-
-        if (file) {
-            const formData = new FormData();
-            formData.append('file', file);
-            const response = await fetch('http://localhost:3001/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-            photoPath = data.filePath;
+    const handleUpdate = async () => {
+        console.log('Starting profile update...');
+        let photoPath = updatedUser.photo;
+    
+        try {
+            if (file) {
+                console.log('Uploading file...');
+                const formData = new FormData();
+                formData.append('file', file);
+                const response = await fetch('http://localhost:3001/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    photoPath = data.filePath;
+                    console.log(`File uploaded to: ${photoPath}`);
+                } else {
+                    const errorText = await response.text();
+                    console.error(`Error uploading image: ${errorText}`);
+                    throw new Error(`Erreur de téléchargement de l'image: ${errorText}`);
+                }
+            }
+    
+            const updatedProfile = {
+                ...updatedUser,
+                photo: photoPath,
+            };
+    
+            console.log('Sending updated profile to server...');
+            await updateUser(user.id, updatedProfile);
+            console.log('Profile updated successfully');
+            setEditingProfile(false);
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Une erreur est survenue lors de la mise à jour du profil. Veuillez réessayer.');
         }
-
-        setProfiles([...profiles, {...newProfile, id: newId, photo: photoPath }]);
-        setNewProfile({ firstName: '', lastName: '', role: '', photo: '' });
-        setFile(null);
     };
 
-    const handleUpdate = async() => {
-        let photoPath = editingProfile.photo;
-
-        if (file) {
-            const formData = new FormData();
-            formData.append('file', file);
-            const response = await fetch('http://localhost:3001/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-            photoPath = data.filePath;
-        }
-
-        setProfiles(profiles.map(p => (p.id === editingProfile.id ? {...editingProfile, photo: photoPath } : p)));
-        setEditingProfile(null);
-        setFile(null);
-    };
-
-    return ( <
-            div >
-            <
-            h2 > Profile Information < /h2> {
-            profiles.map(profile => ( <
-                div key = { profile.id }
-                className = "profile-container" >
-                <
-                img src = { profile.photo }
-                alt = { `${profile.firstName} ${profile.lastName}` }
-                className = "profile-photo"
-                width = "80" / >
-                <
-                p > < strong > First Name: < /strong> {profile.firstName}</p >
-                <
-                p > < strong > Last Name: < /strong> {profile.lastName}</p >
-                <
-                p > < strong > Full Name: < /strong> {profile.firstName} {profile.lastName}</p >
-                <
-                p > < strong > Role: < /strong> {profile.role}</p >
-                <
-                button onClick = {
-                    () => handleEdit(profile.id)
-                } > Edit < /button> <
-                button onClick = {
-                    () => handleDelete(profile.id)
-                } > Delete < /button> < /
-                div >
-            ))
-        } {
-            editingProfile && ( <
-                div className = "edit-container" >
-                <
-                h3 > Edit Profile < /h3> <
-                input type = "text"
-                value = { editingProfile.firstName }
-                onChange = {
-                    (e) => setEditingProfile({...editingProfile, firstName: e.target.value })
-                }
-                placeholder = "First Name" /
-                >
-                <
-                input type = "text"
-                value = { editingProfile.lastName }
-                onChange = {
-                    (e) => setEditingProfile({...editingProfile, lastName: e.target.value })
-                }
-                placeholder = "Last Name" /
-                >
-                <
-                input type = "text"
-                value = { editingProfile.role }
-                onChange = {
-                    (e) => setEditingProfile({...editingProfile, role: e.target.value })
-                }
-                placeholder = "Role" /
-                >
-                <
-                input type = "file"
-                onChange = {
-                    (e) => setFile(e.target.files[0])
-                }
-                placeholder = "Photo URL" /
-                >
-                <
-                button onClick = { handleUpdate } > Update < /button> < /
-                div >
-            )
-        } <
-        div className = "add-container" >
-        <
-        h3 > Add New Profile < /h3> <
-    input type = "text"
-    value = { newProfile.firstName }
-    onChange = {
-        (e) => setNewProfile({...newProfile, firstName: e.target.value })
-    }
-    placeholder = "First Name" /
-        >
-        <
-        input type = "text"
-    value = { newProfile.lastName }
-    onChange = {
-        (e) => setNewProfile({...newProfile, lastName: e.target.value })
-    }
-    placeholder = "Last Name" /
-        >
-        <
-        input type = "text"
-    value = { newProfile.role }
-    onChange = {
-        (e) => setNewProfile({...newProfile, role: e.target.value })
-    }
-    placeholder = "Role" /
-        >
-        <
-        input type = "file"
-    onChange = {
-        (e) => setFile(e.target.files[0])
-    }
-    placeholder = "Photo URL" /
-        >
-        <
-        button onClick = { handleAdd } > Add < /button> < /
-        div > <
-        /div>
-);
+    return (
+        <div className="profile-container">
+            <h2>Informations du Profil</h2>
+            <div className="profile-details">
+                <img src={updatedUser.photo} alt={`${updatedUser.firstName} ${updatedUser.lastName}`} className="profile-photo" />
+                <p><strong>Prénom :</strong> {updatedUser.firstName}</p>
+                <p><strong>Nom :</strong> {updatedUser.lastName}</p>
+                <p><strong>Nom complet :</strong> {`${updatedUser.firstName} ${updatedUser.lastName}`}</p>
+                <p><strong>Rôle :</strong> {updatedUser.role}</p>
+                <button onClick={() => setEditingProfile(true)}>Modifier</button>
+            </div>
+            {editingProfile && (
+                <div className="edit-container">
+                    <h3>Modifier le profil</h3>
+                    <input
+                        type="text"
+                        value={updatedUser.firstName}
+                        onChange={(e) => setUpdatedUser({ ...updatedUser, firstName: e.target.value })}
+                        placeholder="Prénom"
+                    />
+                    <input
+                        type="text"
+                        value={updatedUser.lastName}
+                        onChange={(e) => setUpdatedUser({ ...updatedUser, lastName: e.target.value })}
+                        placeholder="Nom"
+                    />
+                    <select value={updatedUser.role} onChange={(e) => setUpdatedUser({ ...updatedUser, role: e.target.value })}>
+                        <option value="admin">Admin</option>
+                        <option value="user">Utilisateur</option>
+                    </select>
+                    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+                    <button onClick={handleUpdate}>Mettre à jour</button>
+                </div>
+            )}
+        </div>
+    );
 };
 
 export default Profile;
