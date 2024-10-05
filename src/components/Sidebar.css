@@ -86,4 +86,13 @@
         text-align: left;
         padding-left: 20px;
     }
+    .chart{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .chart-container {
+        flex-direction:column;
+        align-items: center;
+
+    }
 }

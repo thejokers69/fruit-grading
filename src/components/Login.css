@@ -1,3 +1,4 @@
+/* src/components/Login.css */
 body {
     margin: 0;
     padding: 0;
@@ -12,7 +13,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #181a1b;
 }
 
 .logo-container {
@@ -21,6 +21,7 @@ body {
 
 .logo {
     width: 150px;
+    opacity: 0.8;
 }
 
 .login-container {

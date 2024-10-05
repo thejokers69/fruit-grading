@@ -1,3 +1,4 @@
+// FRUIT-GRADING/src/contexts/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
   createUser,
@@ -16,7 +17,14 @@ export const AuthProvider = ({ children }) => {
     const loadUsers = async () => {
       try {
         const usersData = await fetchUsers();
+        console.log(usersData); 
         setUsers(usersData);
+
+        const loggedInUsername = localStorage.getItem('loggedInUsername');
+        const currentUser = usersData.find(u => u.username === loggedInUsername);
+        if (currentUser) {
+          setUser(currentUser);  
+        }
       } catch (error) {
         console.error("Erreur de chargement des utilisateurs :", error);
       }
@@ -24,14 +32,13 @@ export const AuthProvider = ({ children }) => {
     loadUsers();
   }, []);
 
-  // Extrait de AuthProvider
   const addUser = async (newUserData) => {
     try {
       const newUser = await createUser(newUserData);
-      const updatedUsers = await fetchUsers();  // Refetch the updated list of users
-      setUsers(updatedUsers);  // Update the state with the latest user list
+      setUsers((prevUsers) => [...prevUsers, newUser]); 
     } catch (error) {
       console.error("Erreur d'ajout de l'utilisateur :", error);
+      alert('Failed to add user.');
     }
   };
 
@@ -44,22 +51,22 @@ export const AuthProvider = ({ children }) => {
       if (user && user.id === userId) setUser(updatedUser);
     } catch (error) {
       console.error("Erreur de mise à jour de l'utilisateur :", error);
+      alert('Failed to update user.');
     }
   };
 
   const deleteUserFromContext = async (userId) => {
     try {
       await deleteUser(userId);
-      const updatedUsers = await fetchUsers();  // Refetch the updated list of users
-      setUsers(updatedUsers);  // Update the state with the latest user list
+      setUsers((prevUsers) => prevUsers.filter((u) => u.id !== userId));
     } catch (error) {
       console.error("Erreur de suppression de l'utilisateur :", error);
+      alert('Failed to delete user.');
     }
   };
 
   const logout = () => {
     setUser(null);
-    // Vous pouvez également nettoyer les données locales ou d'autres états ici si nécessaire
   };
 
   return (
@@ -74,8 +81,7 @@ export const AuthProvider = ({ children }) => {
         logout,
       }}
     >
-      {" "}
-      {children}{" "}
+      {children}
     </AuthContext.Provider>
   );
 };

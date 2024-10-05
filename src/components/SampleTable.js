@@ -1,3 +1,4 @@
+// FRUIT-GRADING/src/components/SampleTable.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -8,13 +9,13 @@ const SampleTable = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('http://localhost:3001/api/data');
-                console.log('Data fetched:', response.data); // Check the fetched data in the console
-                setData(response.data); // Store the data in the state
+                console.log('Data fetched:', response.data); // Check data structure
+                setData(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-
+    
         fetchData();
     }, []);
 

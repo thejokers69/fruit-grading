@@ -1,4 +1,4 @@
-// src/components/Logout.js
+// FRUIT-GRADING/src/components/Logout.js
 
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

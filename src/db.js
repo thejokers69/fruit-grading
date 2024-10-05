@@ -1,4 +1,4 @@
-// src/db.js
+// FRUIT-GRADING/src/db.js
 import { Sequelize } from 'sequelize';
 import config from './config.js';
 

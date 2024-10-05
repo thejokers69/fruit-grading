@@ -1,4 +1,4 @@
-// src/api/userApi.js
+// FRUIT-GRADING/src/api/userApi.js
 export const createUser = async (userData) => {
   const response = await fetch("http://localhost:3001/register", {
     method: "POST",
@@ -40,7 +40,7 @@ export const deleteUser = async (userId) => {
     throw new Error("Failed to delete user");
   }
 
-  return response.json();
+  return response; 
 };
 
 export const fetchUsers = async () => {

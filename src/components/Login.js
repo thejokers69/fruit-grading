@@ -23,6 +23,7 @@ const Login = () => {
                 setUser(data);
                 localStorage.setItem('role', data.role);
                 localStorage.setItem('username', data.username);
+                localStorage.setItem('loggedInUsername', data.username); // Set 'loggedInUsername'
                 navigate('/dashboard');
             } else {
                 setError(data.message);
