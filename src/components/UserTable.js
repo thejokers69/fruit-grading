@@ -116,7 +116,7 @@ const UserTable = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nom d'utilisateur</th>
+            <th>Nom d&apos;utilisateur</th>
             <th>Rôle</th>
             <th>Actions</th>
           </tr>
@@ -140,7 +140,7 @@ const UserTable = () => {
 
       {isEditing && (
         <div className="edit-container">
-          <h3>Modifier l'utilisateur</h3>
+          <h3>Modifier l&apos;utilisateur</h3>
           <input
             type="text"
             value={currentEditUser.username}
