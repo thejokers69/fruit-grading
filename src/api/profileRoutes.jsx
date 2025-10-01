@@ -1,6 +1,6 @@
 // FRUIT_GRADING/src/api/profileRoutes.js
 import express from 'express';
-import User from '../models/User.js'; // Adjust path according to your project structure
+import User from '../models/User.jsx'; // Adjust path according to your project structure
 
 const router = express.Router();
 
@@ -14,7 +14,8 @@ router.put('/users/:id', async (req, res) => {
     } else {
       res.status(404).json({ error: "User not found" });
     }
-  } catch (err) {
+  } catch (error) {
+    console.error("Error updating profile:", error);
     res.status(500).json({ error: "Failed to update profile" });
   }
 });

@@ -1,10 +1,10 @@
 // src/components/UserTable.js
 import React, { useState, useEffect } from "react"; 
-import { useAuth } from "../contexts/AuthContext.js";
+import { useAuth } from "../contexts/AuthContext";
 import "./UserTable.css";
 
 const UserTable = () => {
-  const { users, setUsers, addUser, updateUser, deleteUser, user } = useAuth();
+  const { users, setUsers, updateUser, deleteUser, user } = useAuth();
   const [newUser, setNewUser] = useState({
     username: "",
     role: "user",

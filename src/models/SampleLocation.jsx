@@ -1,6 +1,6 @@
 // FRUIT-GRADING/src/models/SampleLocation.js
 import { DataTypes } from "sequelize";
-import sequelize from "../db.js"; // Chemin corrigé
+import sequelize from "../db.jsx"; // Chemin corrigé
 
 const SampleLocation = sequelize.define("SampleLocation", {
   id: {

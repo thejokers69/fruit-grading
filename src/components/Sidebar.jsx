@@ -1,7 +1,7 @@
 // FRUIT-GRADING/src/components/Sidebar.js
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext.js";
+import { useAuth } from "../contexts/AuthContext";
 import "./Sidebar.css";
 import {
   FaTachometerAlt,
@@ -16,7 +16,7 @@ import {
 const Sidebar = () => {
   const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false); // Initialisation de l'état pour la barre latérale
-  const logo = `${process.env.PUBLIC_URL}/assets/mascir.jpeg`;
+  const logo = "/assets/mascir.jpeg"; // Vite uses public directory directly
 
   return (
     <>

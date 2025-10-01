@@ -1,7 +1,7 @@
-// src/config.js
+// src/config.jsx
 const config = {
     database: {
-        username: 'root',
+        username: 'Thejokers69',
         password: process.env.DB_PASSWORD,
         database: 'fruit-grading',
         host: 'localhost',

@@ -5,17 +5,18 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext.js";
-import Dashboard from "./components/Dashboard.js";
-import Charts from "./components/Charts.js";
-import Table from "./components/DataTable.js";
-import Map from "./components/Map.js";
-import Profile from "./components/Profile.js";
-import Login from "./components/Login.js";
-import Logout from "./components/Logout.js";
-import UserTable from "./components/UserTable.js";
-import Sidebar from "./components/Sidebar.js";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import Dashboard from "./components/Dashboard";
+import Charts from "./components/Charts";
+import Table from "./components/DataTable";
+import Map from "./components/Map";
+import Profile from "./components/Profile";
+import Login from "./components/Login";
+import Logout from "./components/Logout";
+import UserTable from "./components/UserTable";
+import Sidebar from "./components/Sidebar";
 import "./App.css";
+import PropTypes from "prop-types";
 
 const ProtectedRoute = ({ element, allowedRoles }) => {
   const { user } = useAuth();
@@ -26,6 +27,11 @@ const ProtectedRoute = ({ element, allowedRoles }) => {
   );
 };
 
+ProtectedRoute.propTypes = {
+  element: PropTypes.node.isRequired,
+  allowedRoles: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
 // A layout that includes the sidebar
 const LayoutWithSidebar = ({ children }) => {
   return (
@@ -34,6 +40,10 @@ const LayoutWithSidebar = ({ children }) => {
       <div className="main-content">{children}</div>
     </div>
   );
+};
+
+LayoutWithSidebar.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 const App = () => {

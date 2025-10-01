@@ -5,7 +5,8 @@ import {
   updateUser,
   deleteUser,
   fetchUsers,
-} from "../api/userApi.js";
+} from "../api/userApi";
+import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
@@ -75,6 +76,7 @@ export const AuthProvider = ({ children }) => {
         user,
         setUser,
         users,
+        setUsers,
         addUser,
         updateUser: updateUserProfile,
         deleteUser: deleteUserFromContext,
@@ -84,6 +86,10 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useAuth = () => useContext(AuthContext);

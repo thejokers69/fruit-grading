@@ -1,6 +1,6 @@
 // FRUIT-GRADING/src/db.js
 import { Sequelize } from 'sequelize';
-import config from './config.js';
+import config from './config.jsx';
 
 const sequelize = new Sequelize(
     config.database.database,

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import SvelteComponent from './SvelteComponent.svelte';
+import PropTypes from "prop-types";
 
 const SvelteComponentWrapper = ({ name }) => {
     const svelteContainer = useRef(null);
@@ -15,7 +16,11 @@ const SvelteComponentWrapper = ({ name }) => {
         };
     }, [name]);
 
-    return <div ref = { svelteContainer } > < /div>;
+    return <div ref = { svelteContainer } />;
+};
+
+SvelteComponentWrapper.propTypes = {
+  name: PropTypes.string.isRequired,
 };
 
 export default SvelteComponentWrapper;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext.js';
+import { useAuth } from '../contexts/AuthContext';
 import './Login.css';
 
 const Login = () => {
@@ -28,7 +28,8 @@ const Login = () => {
             } else {
                 setError(data.message);
             }
-        } catch (err) {
+        } catch (error) {
+            console.error("Login error:", error);
             setError('Something went wrong. Please try again.');
         }
     };

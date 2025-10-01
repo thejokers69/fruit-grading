@@ -1,6 +1,6 @@
 // FRUIT-GRADING/src/models/SampleData.js
 import { DataTypes } from "sequelize";
-import sequelize from "../db.js"; 
+import sequelize from "../db.jsx"; 
 
 const SampleData = sequelize.define("SampleData", {
   id: {

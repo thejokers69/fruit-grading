@@ -1,6 +1,6 @@
 // src/createAdmin.js
-import sequelize from './db.js';
-import User from './models/User.js';
+import sequelize from './db';
+import User from './models/User';
 import bcrypt from 'bcryptjs';
 
 (async () => {

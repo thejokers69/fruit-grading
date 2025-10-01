@@ -1,8 +1,8 @@
 // fruit_grading/src/components/Charts.js
 import React from "react";
-import LineChart from "./LineChart.js";
-import BarChart from "./BarChart.js";
-import PieChart from "./PieChart.js";
+import LineChart from "./LineChart.jsx";
+import BarChart from "./BarChart.jsx";
+import PieChart from "./PieChart.jsx";
 
 const Charts = () => {
   return (

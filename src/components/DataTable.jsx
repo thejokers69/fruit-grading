@@ -11,7 +11,7 @@ class DataTable extends React.Component {
     axios
       .get("http://localhost:3001/api/data")
       .then((response) => {
-        console.log("Fetched data:", response.data)
+        console.log("Fetched data:", response.data);
         this.setState({ data: response.data });
       })
       .catch((error) => {
@@ -24,18 +24,22 @@ class DataTable extends React.Component {
       <table>
         <thead>
           <tr>
-            <th> ID </th> <th> Sample </th> <th> Quality </th> <th> Date </th>{" "}
-          </tr>{" "}
-        </thead>{" "}
+            <th>ID</th>
+            <th>Sample</th>
+            <th>Quality</th>
+            <th>Date</th>
+          </tr>
+        </thead>
         <tbody>
-          {" "}
           {this.state.data.map((item) => (
             <tr key={item.id}>
-              <td> {item.id} </td> <td> {item.sample} </td>{" "}
-              <td> {item.quality} </td> <td> {item.date} </td>{" "}
+              <td>{item.id}</td>
+              <td>{item.sample}</td>
+              <td>{item.quality}</td>
+              <td>{item.date}</td>
             </tr>
-          ))}{" "}
-        </tbody>{" "}
+          ))}
+        </tbody>
       </table>
     );
   }

@@ -1,6 +1,6 @@
 // FRUIT-GRADING/src/api.userRoutes.js
 import express from 'express';
-import User from '../models/User.js'; // Adjust path according to your project structure
+import User from '../models/User.jsx'; // Adjust path according to your project structure
 
 const router = express.Router();
 
@@ -21,7 +21,8 @@ router.post('/users', async (req, res) => {
   try {
     const newUser = await User.create(req.body);
     res.json(newUser);
-  } catch (err) {
+  } catch (error) {
+    console.error("Error adding user:", error);
     res.status(500).json({ error: "Failed to add user" });
   }
 });
@@ -36,7 +37,8 @@ router.put('/users/:id', async (req, res) => {
     } else {
       res.status(404).json({ error: "User not found" });
     }
-  } catch (err) {
+  } catch (error) {
+    console.error("Error updating user:", error);
     res.status(500).json({ error: "Failed to update user" });
   }
 });
@@ -51,7 +53,8 @@ router.delete('/users/:id', async (req, res) => {
     } else {
       res.status(404).json({ error: "User not found" });
     }
-  } catch (err) {
+  } catch (error) {
+    console.error("Error deleting user:", error);
     res.status(500).json({ error: "Failed to delete user" });
   }
 });

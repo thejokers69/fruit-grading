@@ -1,6 +1,6 @@
 // FRUIT-GRADING/src/components/Profile.js
-import React, { useState } from "react";
-import { useAuth } from "../contexts/AuthContext.js";
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../contexts/AuthContext";
 import "./Profile.css";
 
 
@@ -16,6 +16,18 @@ const Profile = () => {
     photo: user?.photo || "",
   });
 
+  // Update the updatedUser state when the user object changes
+  useEffect(() => {
+    if (user) {
+      setUpdatedUser({
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        role: user.role || "",
+        photo: user.photo || "",
+      });
+    }
+  }, [user]);
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
@@ -28,7 +40,13 @@ const Profile = () => {
 
   const handleUpdate = async () => {
     let photoPath = updatedUser.photo;
-    console.log("user ID: " + user.id);
+    console.log("user ID: " + user?.id);
+    console.log("user object:", user);
+
+    if (!user || !user.id) {
+      alert("Error: User not properly loaded. Please refresh the page and try again.");
+      return;
+    }
 
     try {
       if (file) {
@@ -66,11 +84,17 @@ const Profile = () => {
     <div className="profile-container">
       <h2>Informations du Profil</h2>
       <div className="profile-details">
-        <img
-          src={updatedUser.photo}
-          alt={`${updatedUser.firstName} ${updatedUser.lastName}`}
-          className="profile-photo"
-        />
+        {updatedUser.photo ? (
+          <img
+            src={updatedUser.photo}
+            alt={`${updatedUser.firstName} ${updatedUser.lastName}`}
+            className="profile-photo"
+          />
+        ) : (
+          <div className="profile-photo-placeholder">
+            <span>No Photo</span>
+          </div>
+        )}
         <p>
           <strong>Prénom :</strong> {updatedUser.firstName}
         </p>
@@ -84,7 +108,12 @@ const Profile = () => {
         <p>
           <strong>Rôle :</strong> {updatedUser.role}
         </p>
-        <button onClick={() => setEditingProfile(true)}>Modifier</button>
+        {user && user.id && (
+          <button onClick={() => setEditingProfile(true)}>Modifier</button>
+        )}
+        {!user || !user.id && (
+          <p><em>Loading user profile...</em></p>
+        )}
       </div>
       {editingProfile && (
         <div className="edit-container">
