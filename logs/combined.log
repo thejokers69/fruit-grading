@@ -79,3 +79,9 @@
 {"level":"info","message":"GET /"}
 {"level":"info","message":"GET /"}
 {"level":"info","message":"GET /"}
+{"level":"info","message":"GET /"}
+{"level":"error"}
+{"level":"info","message":"GET /"}
+{"level":"error"}
+{"level":"info","message":"GET /user"}
+{"level":"error"}
