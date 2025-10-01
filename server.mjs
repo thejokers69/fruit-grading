@@ -115,7 +115,6 @@ app.post("/login", async (req, res) => {
     
     if (user) {
       const isValidPassword = bcrypt.compareSync(password, user.password);
-      console.log(`Password comparison result: ${isValidPassword}`);
       
       if (isValidPassword) {
         console.log(`Login successful for ${username}`);
