@@ -111,7 +111,7 @@ app.post("/login", async (req, res) => {
   console.log(`Login attempt: ${username} with password: ${password}`);
   try {
     const user = await User.findOne({ where: { username } });
-    console.log(`User found:`, user ? `${user.username} with hash: ${user.password}` : 'No user found');
+    console.log(user ? `User found: ${user.username}` : 'No user found');
     
     if (user) {
       const isValidPassword = bcrypt.compareSync(password, user.password);
