@@ -108,7 +108,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(`Login attempt: ${username} with password: ${password}`);
+  console.log(`Login attempt for username: ${username}`);
   try {
     const user = await User.findOne({ where: { username } });
     console.log(user ? `User found: ${user.username}` : 'No user found');
