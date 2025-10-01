@@ -4,6 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import css from "rollup-plugin-css-only";
 import terser from "@rollup/plugin-terser";
 import { spawn } from "child_process";
+import livereload from "rollup-plugin-livereload";
 
 export default {
   input: "src/svelte/main.js",

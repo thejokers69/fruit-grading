@@ -1,4 +1,8 @@
 // FRUIT-GRADING/server.mjs
+import dotenv from 'dotenv';
+// Load environment variables first
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import multer from "multer";
@@ -6,14 +10,16 @@ import path from "path";
 import bcrypt from "bcryptjs";
 import fs from "fs";
 import winston from "winston";
-import sequelize from "./src/db.js";
-import User from "./src/models/User.js";
-import SampleData from "./src/models/SampleData.js";
-import SampleLocation from "./src/models/SampleLocation.js";
 
-import userRoutes from "./src/api/userRoutes.js";
-import profileRoutes from "./src/api/profileRoutes.js";
-import sampleDataRoutes from "./src/api/sampleDataRoutes.js";
+// Now that dotenv is loaded, we can import the database-related modules
+const { default: sequelize } = await import("./src/db.jsx");
+const { default: User } = await import("./src/models/User.jsx");
+const { default: SampleData } = await import("./src/models/SampleData.jsx");
+const { default: SampleLocation } = await import("./src/models/SampleLocation.jsx");
+
+const { default: userRoutes } = await import("./src/api/userRoutes.jsx");
+const { default: profileRoutes } = await import("./src/api/profileRoutes.jsx");
+const { default: sampleDataRoutes } = await import("./src/api/sampleDataRoutes.jsx");
 
 const app = express();
 const port = 3001;
@@ -102,12 +108,24 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(`Login attempt: ${username}`);
+  console.log(`Login attempt: ${username} with password: ${password}`);
   try {
     const user = await User.findOne({ where: { username } });
-    if (user && bcrypt.compareSync(password, user.password)) {
-      res.json({ username: user.username, role: user.role });
+    console.log(`User found:`, user ? `${user.username} with hash: ${user.password}` : 'No user found');
+    
+    if (user) {
+      const isValidPassword = bcrypt.compareSync(password, user.password);
+      console.log(`Password comparison result: ${isValidPassword}`);
+      
+      if (isValidPassword) {
+        console.log(`Login successful for ${username}`);
+        res.json({ id: user.id, username: user.username, role: user.role, firstName: user.firstName, lastName: user.lastName, photo: user.photo });
+      } else {
+        console.log(`Password mismatch for ${username}`);
+        res.status(401).json({ message: "Invalid credentials" });
+      }
     } else {
+      console.log(`User ${username} not found`);
       res.status(401).json({ message: "Invalid credentials" });
     }
   } catch (error) {
@@ -119,7 +137,7 @@ app.post("/login", async (req, res) => {
 app.get("/api/users", async (req, res) => {
   try {
     const users = await User.findAll({
-      attributes: ["id", "username", "role"], 
+      attributes: ["id", "username", "role", "firstName", "lastName", "photo"], 
     });
     res.status(200).json(users); 
   } catch (error) {
@@ -218,7 +236,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   logger.error(err.stack);
   res.status(500).send("Something broke!");
 });
