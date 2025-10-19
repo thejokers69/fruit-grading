@@ -59,7 +59,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
     return res.status(400).send({ error: "No file uploaded" });
   }
   console.log("File uploaded:", req.file.filename);
-  res.status(200).send({ filePath: `/${req.file.filename}` });
+  res.status(200).send({ filePath: `http://localhost:3001/${req.file.filename}` });
 });
 
 app.put("/api/user/update", async (req, res) => {
@@ -118,7 +118,12 @@ app.post("/login", async (req, res) => {
       
       if (isValidPassword) {
         console.log(`Login successful for ${username}`);
-        res.json({ id: user.id, username: user.username, role: user.role, firstName: user.firstName, lastName: user.lastName, photo: user.photo });
+        let photoUrl = user.photo;
+        if (photoUrl && !photoUrl.startsWith('http')) {
+          const photoPath = photoUrl.startsWith('/') ? photoUrl : `/${photoUrl}`;
+          photoUrl = `http://localhost:3001${photoPath}`;
+        }
+        res.json({ id: user.id, username: user.username, role: user.role, firstName: user.firstName, lastName: user.lastName, photo: photoUrl });
       } else {
         console.log(`Password mismatch for ${username}`);
         res.status(401).json({ message: "Invalid credentials" });
@@ -138,7 +143,19 @@ app.get("/api/users", async (req, res) => {
     const users = await User.findAll({
       attributes: ["id", "username", "role", "firstName", "lastName", "photo"], 
     });
-    res.status(200).json(users); 
+    
+    // Transform photo paths to full URLs
+    const usersWithFullPhotoUrls = users.map(user => {
+      const userData = user.toJSON();
+      if (userData.photo && !userData.photo.startsWith('http')) {
+        // Add full URL prefix, ensuring we have exactly one slash
+        const photoPath = userData.photo.startsWith('/') ? userData.photo : `/${userData.photo}`;
+        userData.photo = `http://localhost:3001${photoPath}`;
+      }
+      return userData;
+    });
+    
+    res.status(200).json(usersWithFullPhotoUrls); 
   } catch (error) {
     console.error("Error fetching users:", error);
     res.status(500).json({ message: "Error fetching users", error });
@@ -195,7 +212,15 @@ app.put("/api/users/:id", async (req, res) => {
       user.photo = photo;
 
       await user.save();
-      res.status(200).json({ message: "Profile updated successfully", user });
+      
+      // Transform photo path to full URL before returning
+      const userResponse = user.toJSON();
+      if (userResponse.photo && !userResponse.photo.startsWith('http')) {
+        const photoPath = userResponse.photo.startsWith('/') ? userResponse.photo : `/${userResponse.photo}`;
+        userResponse.photo = `http://localhost:3001${photoPath}`;
+      }
+      
+      res.status(200).json({ message: "Profile updated successfully", user: userResponse });
     } else {
       res.status(404).json({ message: "User not found" });
     }

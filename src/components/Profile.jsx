@@ -72,6 +72,16 @@ const Profile = () => {
       };
 
       await updateUser(user.id, updatedProfile);
+      
+      // Update local state with the new photo URL
+      setUpdatedUser(prev => ({
+        ...prev,
+        photo: photoPath
+      }));
+      
+      // Clear the file input
+      setFile(null);
+      
       setEditingProfile(false);
     } catch (error) {
       console.error("Error updating profile:", error);

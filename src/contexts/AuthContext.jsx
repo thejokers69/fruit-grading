@@ -45,7 +45,9 @@ export const AuthProvider = ({ children }) => {
 
   const updateUserProfile = async (userId, userData) => {
     try {
-      const updatedUser = await updateUser(userId, userData);
+      const response = await updateUser(userId, userData);
+      // Extract the user object from the response
+      const updatedUser = response.user;
       setUsers((prevUsers) =>
         prevUsers.map((u) => (u.id === userId ? updatedUser : u))
       );
